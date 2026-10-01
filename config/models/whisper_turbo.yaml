@@ -1,0 +1,12 @@
+name: "whisper_turbo"
+display_name: "OpenAI Whisper Large V3 Turbo"
+version: "v3-turbo"
+languages: ["en", "zh", "id"]
+streaming_supported: false
+cpu_threads: 6
+quantization: "int8"
+device: "cpu"
+context_window_ms: 5000
+model_params:
+  backend: "faster-whisper"
+  runtime: "ctranslate2"

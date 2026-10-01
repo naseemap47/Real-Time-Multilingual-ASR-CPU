@@ -1,0 +1,12 @@
+name: "parakeet_tdt"
+display_name: "NVIDIA Parakeet TDT 0.6B"
+version: "0.6B"
+languages: ["en"]
+streaming_supported: true
+cpu_threads: 4
+quantization: "int8"
+device: "cpu"
+context_window_ms: 1600
+model_params:
+  architecture: "Token-and-Duration Transducer"
+  runtime: "onnxruntime"

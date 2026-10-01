@@ -1,0 +1,12 @@
+name: "moonshine"
+display_name: "Moonshine ASR (Tiny/Base)"
+version: "base"
+languages: ["en", "zh", "id"]
+streaming_supported: true
+cpu_threads: 2
+quantization: "int8"
+device: "cpu"
+context_window_ms: 2000
+model_params:
+  variants: ["tiny", "base"]
+  runtime: "onnxruntime"
