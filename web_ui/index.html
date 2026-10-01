@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Multilingual ASR on CPU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="navbar">
+            <div class="logo">
+                <span class="logo-icon">🎙️</span>
+                <h1>Multilingual ASR <span class="badge-cpu">CPU-Only</span></h1>
+            </div>
+            <div class="status-indicator">
+                <span id="statusBadge" class="badge badge-disconnected">DISCONNECTED</span>
+            </div>
+        </header>
+
+        <!-- Main Grid Layout -->
+        <main class="dashboard-grid">
+            <!-- Left Sidebar Controls -->
+            <section class="card controls-card">
+                <h2>Control Panel</h2>
+                
+                <div class="form-group">
+                    <label for="modelSelect">ASR Model Engine</label>
+                    <select id="modelSelect" class="form-control">
+                        <option value="qwen3_asr">Qwen3-ASR Multilingual (0.6B)</option>
+                        <option value="parakeet_tdt">NVIDIA Parakeet TDT (0.6B)</option>
+                        <option value="moonshine">Moonshine ASR (Tiny/Base)</option>
+                        <option value="whisper_turbo">OpenAI Whisper Large V3 Turbo</option>
+                        <option value="mock">Mock Engine (Instant Test)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="langSelect">Target Language</label>
+                    <select id="langSelect" class="form-control">
+                        <option value="en">English (en)</option>
+                        <option value="zh">Mandarin Chinese (zh)</option>
+                        <option value="id">Bahasa Indonesia (id)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Audio Source (WAV 16kHz Mono)</label>
+                    <div class="file-dropzone" id="dropzone">
+                        <input type="file" id="audioFileInput" accept=".wav" style="display: none;">
+                        <div class="dropzone-text" id="dropzoneText">
+                            <span class="icon">📁</span>
+                            <p>Click or drag WAV file here</p>
+                            <span class="file-info" id="fileInfoText">No file selected</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btnStart" class="btn btn-primary" disabled>▶ Start Stream</button>
+                    <button id="btnStop" class="btn btn-danger" disabled>⏹ Stop</button>
+                    <button id="btnReset" class="btn btn-secondary">🔄 Reset</button>
+                </div>
+            </section>
+
+            <!-- Center Live Transcript Feed -->
+            <section class="card transcript-card">
+                <div class="card-header">
+                    <h2>Live Call Leg Transcript</h2>
+                    <span id="chunkCountBadge" class="badge badge-info">0 chunks</span>
+                </div>
+                
+                <div class="transcript-box" id="transcriptFeed">
+                    <div class="placeholder-text">
+                        Load a WAV file and click "Start Stream" to simulate a real-time call leg transcription...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Telemetry & Metrics Dashboard -->
+            <section class="card telemetry-card">
+                <h2>Real-Time Telemetry</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span class="metric-label">Latency (ms)</span>
+                        <span class="metric-value" id="valLatency">--</span>
+                    </div>
+
+                    <div class="metric-box">
+                        <span class="metric-label">Real-Time Factor (RTF)</span>
+                        <span class="metric-value" id="valRtf">--</span>
+                        <span class="metric-sub" id="subRtfState">Real-time capable</span>
+                    </div>
+
+                    <div class="metric-box">
+                        <span class="metric-label">Active Call Legs</span>
+                        <span class="metric-value" id="valActiveLegs">0</span>
+                    </div>
+
+                    <div class="metric-box">
+                        <span class="metric-label">Audio Stream Duration</span>
+                        <span class="metric-value" id="valAudioDuration">0.0s</span>
+                    </div>
+                </div>
+
+                <div class="telemetry-info">
+                    <h3>Execution Environment</h3>
+                    <ul>
+                        <li><strong>Target Platform:</strong> CPU Only (x86_64)</li>
+                        <li><strong>Input Format:</strong> 16 kHz Mono Linear PCM</li>
+                        <li><strong>Chunking Window:</strong> 200 ms</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
