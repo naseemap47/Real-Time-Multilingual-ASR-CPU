@@ -36,7 +36,7 @@ uv sync
 ### 2. Run API Server & Web UI
 ```bash
 # Start FastAPI WebSocket Server & Web UI
-uv run uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+uv run python -m src.api.main
 ```
 Open your browser and navigate to:
 👉 **`http://localhost:8000/ui/`**

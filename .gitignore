@@ -219,3 +219,6 @@ __marimo__/
 
 # pdf
 *.pdf
+
+# audio files
+*.wav
