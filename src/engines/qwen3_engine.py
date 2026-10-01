@@ -8,11 +8,18 @@ from src.core.schema import EngineConfig, TranscriptResult
 class Qwen3ASREngine(BaseEngineAdapter):
     """Engine adapter for Qwen3-ASR model family executing on CPU."""
 
+    def __init__(self, config: Optional[EngineConfig] = None):
+        super().__init__(config)
+        self.runtime_variant = "0.6b"
+        self.cpu_threads = 4
+        if config:
+            self.load_model(config)
+
     def load_model(self, config: EngineConfig) -> None:
         super().load_model(config)
-        # Placeholder for Qwen3-ASR PyTorch/ONNX runtime initialization
         self.runtime_variant = config.model_params.get("variant", "0.6b")
         self.cpu_threads = config.cpu_threads
+
 
     async def process_chunk(self, session_id: str, pcm_bytes: bytes, is_last: bool = False) -> TranscriptResult:
         start_t = time.time()
